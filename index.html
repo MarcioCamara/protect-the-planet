@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>protect the planet</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <audio id="enemyExplosionSound" src="sounds/enemy-explodes.wav"></audio>
+    <audio id="playerExplosionSound" src="sounds/player-explodes.wav"></audio>
+    <audio id="laserShootSound" src="sounds/laser-shoot.wav"></audio>
+    <audio id="backgroundMusic" src="sounds/spaceship-shooter.wav"></audio>
+
+    <div class="game-screen" id="gameScreen">
+        <div id="gui">
+            Planet Health
+
+            <div id="planet-health-container">
+                <div id="planetHealthBar"></div>
+            </div>
+
+            <span class="enemies-counter">Remaining Enemies: <span id="enemiesCounter">150</span></span>
+        </div>
+
+        <div class="player" id="player"></div>
+
+        <div class="message" id="message">
+            <span id="playButton"></button>Play</span>
+        </div>
+
+        <div class="dialogue" id="dialogue">
+            <img id="dialoguePicture" class="dialogue-picture">
+
+            <div class="dialogue-message">
+                <label id="dialogueLabel" class="dialogue-label"></label>
+
+                <span id="nextDialogue" class="next-dialogue animate__animated animate__infinite animate__heartBeat">></span>
+            </div>
+            
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>
