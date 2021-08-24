@@ -38,10 +38,12 @@ let interactivityVariables = {
 
 let dialogues = [
   {
+    id: 0,
     sentence: 'Hey, viajante! Graças a Glork, você acordou!',
     picture: 'images/happy-wolf.png',
   },
   {
+    id: 1,
     sentence: 'Meu nome é <strong>Kieko</strong>. Qual é o seu nome?',
     picture: 'images/default-wolf.png',
     interactivity: {
@@ -50,10 +52,12 @@ let dialogues = [
     },
   },
   {
+    id: 2,
     sentence:`Certo, <strong>${interactivityVariables.playerName}</strong>. O planeta está sendo atacado por uma tropa alienigena!`,
     picture: 'images/annoyed-wolf.png',
   },
   {
+    id: 3,
     sentence: 'Precisamos fazer algo sobre isso. Entre na sua nave e vamos acabar com eles!',
     picture: 'images/angry-wolf.png',
   },
@@ -90,26 +94,24 @@ document.getElementById('nextDialogue').addEventListener('click', changeDialogue
 isNextAInput = false;
 
 function changeDialogue() {
-  if(isNextAInput && dialogues[currentDialogue].interactivity) {
+  if(isNextAInput && dialogues[currentDialogue] && dialogues[currentDialogue].interactivity) {
     document.getElementById('inputLabel').innerHTML = dialogues[currentDialogue].interactivity.text;
     document.getElementById('inputContainer').style.display = 'flex';    
     
     document.getElementById('confirmInput').addEventListener('click', () => {
       document.getElementById('inputContainer').style.display = 'none';    
-      interactivityVariables.playerName = document.getElementById('input').value;
-      currentDialogue++;
-
-      //precisa enteder aqui porque tá pulando 2 dialogos
-      // isNextAInput = false;
+      interactivityVariables[dialogues[currentDialogue].interactivity.variable] = document.getElementById('input').value;
+      dialogues[currentDialogue + 1].sentence = `Certo, <strong>${interactivityVariables.playerName}</strong>. O planeta está sendo atacado por uma tropa alienigena!`;
+      isNextAInput = false;
+      changeDialogue();
     });
 
-    // interactiviTyVariables
     isNextAInput = false;
   } else {
     currentDialogue++;
   }
   
-  if(dialogues[currentDialogue].interactivity) {
+  if(dialogues[currentDialogue] && dialogues[currentDialogue].interactivity) {
     isNextAInput = true;    
   }
 
