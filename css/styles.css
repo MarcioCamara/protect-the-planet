@@ -22,7 +22,7 @@ body {
   background-color: #1a0c1a;
   width: 100vw;
   height: 100vh;
-  text-shadow: rgb(26, 12, 26) 1px 0px 0px,
+  text-shadow: #1a0c1a 1px 0px 0px,
     rgb(26, 12, 26) 0.540302px 0.841471px 0px,
     rgb(26, 12, 26) -0.416147px 0.909297px 0px,
     rgb(26, 12, 26) -0.989992px 0.14112px 0px,
@@ -160,4 +160,37 @@ body {
   position: absolute;
   left: 50px;
   justify-content: space-between;
+}
+
+.input-label {
+  color: #1a0c1a;
+  text-shadow: none;
+}
+
+.confirm-input {
+  color: #1a0c1a;  
+  text-shadow: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  box-shadow: #1a0c1a 1px 0px 0px, #1a0c1a 0.540302px 0.841471px 0px,
+    #1a0c1a -0.416147px 0.909297px 0px, #1a0c1a -0.989992px 0.14112px 0px,
+    #1a0c1a -0.653644px -0.756802px 0px, #1a0c1a 0.283662px -0.958924px 0px,
+    #1a0c1a 0.96017px -0.279415px 0px;
+  cursor: pointer;
+  align-self: flex-start;
+  margin-top: 8px;
+}
+
+.input-container {
+  width: 448px;
+  height: 64px;
+  background-color: #edeef2;
+  display: none;
+  flex-direction: column;
+  padding: 16px;
+  position: absolute;
+  margin: auto;
+  margin-top: calc(50vh - 64px);
+  margin-left: 16px;
+  margin-right: 16px;
 }

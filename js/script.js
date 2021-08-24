@@ -32,7 +32,9 @@ let frames;
 
 let planetHealth = undefined;
 
-let playerName = 'BILLY';
+let interactivityVariables = {
+  playerName: 'BILLY',
+}
 
 let dialogues = [
   {
@@ -42,9 +44,13 @@ let dialogues = [
   {
     sentence: 'Meu nome é <strong>Kieko</strong>. Qual é o seu nome?',
     picture: 'images/default-wolf.png',
+    interactivity: {
+      text: 'Qual é o seu nome?',
+      variable: 'playerName',
+    },
   },
   {
-    sentence:`Certo, <strong>${playerName}</strong>. O planeta está sendo atacado por uma tropa alienigena!`,
+    sentence:`Certo, <strong>${interactivityVariables.playerName}</strong>. O planeta está sendo atacado por uma tropa alienigena!`,
     picture: 'images/annoyed-wolf.png',
   },
   {
@@ -81,10 +87,32 @@ document.getElementById('playButton').addEventListener('click', () => {
 
 document.getElementById('nextDialogue').addEventListener('click', changeDialogue);
 
+isNextAInput = false;
+
 function changeDialogue() {
-  currentDialogue++;
-  console.log(currentDialogue);
-  console.log(dialogues[currentDialogue]);
+  if(isNextAInput && dialogues[currentDialogue].interactivity) {
+    document.getElementById('inputLabel').innerHTML = dialogues[currentDialogue].interactivity.text;
+    document.getElementById('inputContainer').style.display = 'flex';    
+    
+    document.getElementById('confirmInput').addEventListener('click', () => {
+      document.getElementById('inputContainer').style.display = 'none';    
+      interactivityVariables.playerName = document.getElementById('input').value;
+      currentDialogue++;
+
+      //precisa enteder aqui porque tá pulando 2 dialogos
+      // isNextAInput = false;
+    });
+
+    // interactiviTyVariables
+    isNextAInput = false;
+  } else {
+    currentDialogue++;
+  }
+  
+  if(dialogues[currentDialogue].interactivity) {
+    isNextAInput = true;    
+  }
+
   if(!dialogues[currentDialogue]) {
     resetGame();
     return;
@@ -434,7 +462,7 @@ function start() {
 
   shootSpeed = 7.5;
 
-  enemyCounter = 150;
+  enemyCounter = 25;
   enemySpeed = 1;
 
   planetHealth = 120;
