@@ -22,8 +22,7 @@ body {
   background-color: #1a0c1a;
   width: 100vw;
   height: 100vh;
-  text-shadow: #1a0c1a 1px 0px 0px,
-    rgb(26, 12, 26) 0.540302px 0.841471px 0px,
+  text-shadow: #1a0c1a 1px 0px 0px, rgb(26, 12, 26) 0.540302px 0.841471px 0px,
     rgb(26, 12, 26) -0.416147px 0.909297px 0px,
     rgb(26, 12, 26) -0.989992px 0.14112px 0px,
     rgb(26, 12, 26) -0.653644px -0.756802px 0px,
@@ -58,6 +57,13 @@ body {
   position: absolute;
   align-items: center;
   width: 512px;
+  flex-direction: column;
+}
+
+.defeat-message,
+.win-message {
+  margin-bottom: 2rem;
+  display: none;
 }
 
 #gui {
@@ -168,7 +174,7 @@ body {
 }
 
 .confirm-input {
-  color: #1a0c1a;  
+  color: #1a0c1a;
   text-shadow: none;
   padding: 4px 8px;
   border-radius: 4px;

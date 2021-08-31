@@ -22,6 +22,7 @@ let screen = {
 let enemies = [];
 let enemyTypes = ['big-enemy', 'medium-enemy', 'little-enemy'];
 let enemyCounter = undefined;
+let generatedEnemies = undefined;
 let enemySpeed = undefined;
 let enemyCreationInterval = undefined;
 
@@ -132,6 +133,7 @@ let playerExplosionSound = document.getElementById('playerExplosionSound');
 let laserShootSound = document.getElementById('laserShootSound');
 let backgroundMusic = document.getElementById('backgroundMusic');
 let gui = document.getElementById('gui');
+let defeatMessage = document.getElementById('defeatMessage');
 
 function resetGame() {
   isGameRunning = true;
@@ -145,10 +147,12 @@ function resetGame() {
   player.xPosition = (screen.width / 2 - (player.object.offsetWidth / 2)) + screen.xStart;
   player.yPosition = (screen.height * .85 - (player.object.offsetHeight / 2)) + screen.yStart;
 
-  enemyCounter = 150;
+  enemyCounter = 25;
+  generatedEnemies = 25;
   enemiesCounterObject.innerHTML = enemyCounter;
 
   planetHealth = 120;
+
   planetHealthBarObject.style.width = `${planetHealth}px`;
 
   gui.style.display = 'flex';
@@ -212,7 +216,7 @@ function getRandomValue(max, min) {
 }
 
 function generateEnemies() {
-  if(isGameRunning && enemyCounter > 0) {
+  if(isGameRunning && generatedEnemies > 0) {
     let position = {
       x: getRandomValue(screen.xStart + player.object.offsetWidth, screen.xEnd - player.object.offsetWidth),
       y: 0,
@@ -225,8 +229,7 @@ function generateEnemies() {
     
     document.body.appendChild(enemyObject);
 
-    enemyCounter--;    
-    enemiesCounterObject.innerHTML = enemyCounter;
+    generatedEnemies--;
   }
 }
 
@@ -234,10 +237,14 @@ function enemyExplosion(enemy, collideWithPlanet = false) {
   enemy.style.backgroundImage = 'url(images/explosion.gif)';
   enemy.style.width = '16px';
   enemy.style.height = '16px';
-  
-  if(!enemy.explode) {    
+
+  if(!enemy.explode) {
+    enemy.explode = true;
+    enemyCounter--;
+    enemiesCounterObject.innerHTML = enemyCounter;
+
     setTimeout(() => {
-      enemy.remove();          
+      enemy.remove();
     }, 750);
     
     if(collideWithPlanet) {
@@ -250,6 +257,10 @@ function enemyExplosion(enemy, collideWithPlanet = false) {
   playEnemyExplosionSound();
   if(planetHealth <= 0) {
     gameStop();
+  }
+
+  if(enemyCounter === 0) {
+    gameStop(true);
   }
 }
 
@@ -390,7 +401,7 @@ function checkPlayerEnemyCollide() {
       setTimeout(() => {
         player.object.style.display = 'none';
       }, 750);
-  
+
       playPlayerExplosionSound();
       gameStop();
     }
@@ -424,9 +435,16 @@ function gameLoop() {
   frames = requestAnimationFrame(gameLoop);
 }
 
-function gameStop() {
+function gameStop(win = false) {
   isGameRunning = false;
   document.getElementById('message').style.display = 'flex';
+  
+  if(win) {
+    winMessage.style.display = 'flex';
+  } else {
+    defeatMessage.style.display = 'flex';
+  }
+
   backgroundMusic.pause();
   backgroundMusic.currentTime = 0;
 
@@ -465,6 +483,7 @@ function start() {
   shootSpeed = 7.5;
 
   enemyCounter = 25;
+  generatedEnemies = 25;
   enemySpeed = 1;
 
   planetHealth = 120;
