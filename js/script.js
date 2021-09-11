@@ -441,8 +441,10 @@ function gameStop(win = false) {
   
   if(win) {
     winMessage.style.display = 'flex';
+    defeatMessage.style.display = 'none';
   } else {
     defeatMessage.style.display = 'flex';
+    winMessage.style.display = 'none';
   }
 
   backgroundMusic.pause();
