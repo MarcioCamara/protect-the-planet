@@ -200,3 +200,53 @@ body {
   margin-left: 16px;
   margin-right: 16px;
 }
+
+.mobile-controllers {
+  display: none;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 512px;
+  position: absolute;
+  opacity: .5;
+  bottom: 0px;
+}
+
+.mobile-directional, .mobile-shoot {
+  z-index: 999;
+  display: flex;
+  border: 2px solid #f1c40fa1;
+  background-color: #262626;
+  color: #f1c40fa1;
+  border-radius: 50%;
+  font-weight: bolder;
+  height: 96px;
+  width: 96px;
+  flex-direction: column;
+  justify-content: center;
+  margin: 16px;
+  bottom: 16px;
+}
+
+.mobile-shoot {
+  font-size: 1.5em;
+  align-items: center;
+}
+
+.left-button, .right-button, .top-button, .bottom-button {
+  display: flex;
+  height: min-content;
+  width: min-content;
+  margin: 8px;
+}
+
+.left-button {
+  transform: rotate(180deg);
+}
+
+.top-button {
+  transform: rotate(-90deg);
+}
+
+.bottom-button {
+  transform: rotate(90deg);
+}

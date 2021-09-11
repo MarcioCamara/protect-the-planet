@@ -69,7 +69,7 @@ gameAttempt = undefined;
 
 window.addEventListener('load', start());
 document.addEventListener('keydown', event => keyDown(event));
-document.addEventListener('click', () => windowClick());
+// document.addEventListener('click', () => windowClick());
 document.addEventListener('keyup', event => keyUp(event));
 document.getElementById('playButton').addEventListener('click', () => {
   gameAttempt++;
@@ -134,6 +134,7 @@ let laserShootSound = document.getElementById('laserShootSound');
 let backgroundMusic = document.getElementById('backgroundMusic');
 let gui = document.getElementById('gui');
 let defeatMessage = document.getElementById('defeatMessage');
+let mobileControllers = document.getElementById('mobileControllers');
 
 function resetGame() {
   isGameRunning = true;
@@ -157,6 +158,9 @@ function resetGame() {
 
   gui.style.display = 'flex';
   dialogue.style.display = 'none';
+  if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+    mobileControllers.style.display = 'flex';
+   }
 }
 
 let shootPrevent = false,
@@ -176,7 +180,7 @@ function keyDown(event) {
     if (!shootPrevent) {
       shootPrevent = true;
       
-      shoot(player.xPosition, player.yPosition);
+      shoot();
       
       setTimeout(function() {
         shootPrevent = false;
@@ -187,11 +191,56 @@ function keyDown(event) {
   }
 }
 
+const topButton = document.getElementById('topButton');
+const leftButton = document.getElementById('leftButton');
+const rightButton = document.getElementById('rightButton');
+const bottomButton = document.getElementById('bottomButton');
+
+window.mobileMovement = function (direction) {
+  if(direction === 'left') {
+    player.xDirection = -1;
+  } else if(direction === 'right') {
+    player.xDirection = 1;
+  } else if(direction === 'top') {
+    player.yDirection = -1;
+  } else if(direction === 'bottom') {
+    player.yDirection = 1;
+  }
+}
+
+const moveTop = window.mobileMovement.bind(null, 'top');
+topButton.addEventListener('touchstart', moveTop);
+topButton.addEventListener('touchend', () => {
+  player.yDirection = 0;
+});
+
+const moveLeft = window.mobileMovement.bind(null, 'left');
+leftButton.addEventListener('touchstart', moveLeft);
+leftButton.addEventListener('touchend', () => {
+  player.xDirection = 0;
+});
+
+const moveRight = window.mobileMovement.bind(null, 'right');
+rightButton.addEventListener('touchstart', moveRight);
+rightButton.addEventListener('touchend', () => {
+  player.xDirection = 0;
+});
+
+const moveBottom = window.mobileMovement.bind(null, 'bottom');
+bottomButton.addEventListener('touchstart', moveBottom);
+bottomButton.addEventListener('touchend', () => {
+  player.yDirection = 0;
+});
+
+const shootButton = document.getElementById('mobileShoot');
+const shootMobile = window.shoot.bind(null, player.xPosition, player.yPosition);
+shootButton.addEventListener('touchstart', shootMobile);
+
 function windowClick() {
   if (!shootPrevent) {
     shootPrevent = true;
     
-    shoot(player.xPosition, player.yPosition);
+    shoot();
     
     setTimeout(function() {
       shootPrevent = false;
@@ -306,11 +355,11 @@ function enemiesController() {
   }
 }
 
-function shoot(x, y) {
+function shoot() {
   if(isGameRunning) {
     let shootObject = document.createElement('div');
     shootObject.className = 'player-shoot';
-    shootObject.style = `top: ${y}px; left: ${x + (player.object.offsetWidth / 2)}px;`;
+    shootObject.style = `top: ${player.yPosition}px; left: ${player.xPosition + (player.object.offsetWidth / 2)}px;`;
 
     document.body.appendChild(shootObject);
     playShootSound();
@@ -461,6 +510,8 @@ function gameStop(win = false) {
     
     shoot.remove();
   }
+
+  mobileControllers.style.display = 'none';
 }
 
 function start() {
