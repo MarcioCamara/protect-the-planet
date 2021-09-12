@@ -54,7 +54,7 @@ let dialogues = [
   },
   {
     id: 2,
-    sentence:`Certo, <strong>${interactivityVariables.playerName}</strong>. O planeta está sendo atacado por uma tropa alienigena!`,
+    sentence: `Certo, <strong>${interactivityVariables.playerName}</strong>. O planeta está sendo atacado por uma tropa alienigena!`,
     picture: 'images/annoyed-wolf.png',
   },
   {
@@ -67,22 +67,24 @@ let dialogues = [
 currentDialogue = undefined;
 gameAttempt = undefined;
 
+isMobile = false;
+
 window.addEventListener('load', start());
 document.addEventListener('keydown', event => keyDown(event));
 // document.addEventListener('click', () => windowClick());
 document.addEventListener('keyup', event => keyUp(event));
 document.getElementById('playButton').addEventListener('click', () => {
   gameAttempt++;
-  
+
   document.getElementById('message').style.display = 'none';
-  
-  if(gameAttempt <= 1) {
+
+  if (gameAttempt <= 1) {
     let dialogue = document.getElementById('dialogue');
     dialogue.style.display = 'flex';
-  
+
     let dialoguePicture = document.getElementById('dialoguePicture');
     dialoguePicture.src = dialogues[currentDialogue].picture;
-    
+
     let dialogueLabel = document.getElementById('dialogueLabel');
     dialogueLabel.innerHTML = dialogues[currentDialogue].sentence;
   } else {
@@ -95,12 +97,12 @@ document.getElementById('nextDialogue').addEventListener('click', changeDialogue
 isNextAInput = false;
 
 function changeDialogue() {
-  if(isNextAInput && dialogues[currentDialogue] && dialogues[currentDialogue].interactivity) {
+  if (isNextAInput && dialogues[currentDialogue] && dialogues[currentDialogue].interactivity) {
     document.getElementById('inputLabel').innerHTML = dialogues[currentDialogue].interactivity.text;
-    document.getElementById('inputContainer').style.display = 'flex';    
-    
+    document.getElementById('inputContainer').style.display = 'flex';
+
     document.getElementById('confirmInput').addEventListener('click', () => {
-      document.getElementById('inputContainer').style.display = 'none';    
+      document.getElementById('inputContainer').style.display = 'none';
       interactivityVariables[dialogues[currentDialogue].interactivity.variable] = document.getElementById('input').value;
       dialogues[currentDialogue + 1].sentence = `Certo, <strong>${interactivityVariables.playerName}</strong>. O planeta está sendo atacado por uma tropa alienigena!`;
       isNextAInput = false;
@@ -111,12 +113,12 @@ function changeDialogue() {
   } else {
     currentDialogue++;
   }
-  
-  if(dialogues[currentDialogue] && dialogues[currentDialogue].interactivity) {
-    isNextAInput = true;    
+
+  if (dialogues[currentDialogue] && dialogues[currentDialogue].interactivity) {
+    isNextAInput = true;
   }
 
-  if(!dialogues[currentDialogue]) {
+  if (!dialogues[currentDialogue]) {
     resetGame();
     return;
   }
@@ -158,16 +160,14 @@ function resetGame() {
 
   gui.style.display = 'flex';
   dialogue.style.display = 'none';
-  if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-    mobileControllers.style.display = 'flex';
-   }
+  mobileControllers.style.display = isMobile ? 'flex' : 'none';
 }
 
 let shootPrevent = false,
-prev = 0;
+  prev = 0;
 function keyDown(event) {
   let key = event.keyCode;
-  
+
   if (key === 37 || key === 65) {
     player.xDirection = -1;
   } else if (key === 39 || key === 68) {
@@ -179,15 +179,15 @@ function keyDown(event) {
   } else if (key === 32) {
     if (!shootPrevent) {
       shootPrevent = true;
-      
+
       shoot();
-      
-      setTimeout(function() {
+
+      setTimeout(function () {
         shootPrevent = false;
       }, 150)
     } else {
-        return false;
-    }    
+      return false;
+    }
   }
 }
 
@@ -197,13 +197,13 @@ const rightButton = document.getElementById('rightButton');
 const bottomButton = document.getElementById('bottomButton');
 
 window.mobileMovement = function (direction) {
-  if(direction === 'left') {
+  if (direction === 'left') {
     player.xDirection = -1;
-  } else if(direction === 'right') {
+  } else if (direction === 'right') {
     player.xDirection = 1;
-  } else if(direction === 'top') {
+  } else if (direction === 'top') {
     player.yDirection = -1;
-  } else if(direction === 'bottom') {
+  } else if (direction === 'bottom') {
     player.yDirection = 1;
   }
 }
@@ -239,21 +239,21 @@ shootButton.addEventListener('touchstart', shootMobile);
 function windowClick() {
   if (!shootPrevent) {
     shootPrevent = true;
-    
+
     shoot();
-    
-    setTimeout(function() {
+
+    setTimeout(function () {
       shootPrevent = false;
     }, 150)
   } else {
-      return false;
+    return false;
   }
 }
 
 function keyUp(event) {
   let key = event.keyCode;
-  
-  if ((key === 37 || key === 65) || (key === 39 || key === 68) ){
+
+  if ((key === 37 || key === 65) || (key === 39 || key === 68)) {
     player.xDirection = 0;
   } else if ((key === 38 || key === 87) || (key === 40 || key === 83)) {
     player.yDirection = 0;
@@ -265,17 +265,17 @@ function getRandomValue(max, min) {
 }
 
 function generateEnemies() {
-  if(isGameRunning && generatedEnemies > 0) {
+  if (isGameRunning && generatedEnemies > 0) {
     let position = {
       x: getRandomValue(screen.xStart + player.object.offsetWidth, screen.xEnd - player.object.offsetWidth),
       y: 0,
-    }    
+    }
 
     let enemyObject = document.createElement('div');
     enemyObject.className = `${enemyTypes[getRandomValue(-1, 3)]} enemy`;
     enemyObject.style = `top: ${position.y}px; left: ${position.x}px;`;
     enemyObject.takenShoots = 0;
-    
+
     document.body.appendChild(enemyObject);
 
     generatedEnemies--;
@@ -287,7 +287,7 @@ function enemyExplosion(enemy, collideWithPlanet = false) {
   enemy.style.width = '16px';
   enemy.style.height = '16px';
 
-  if(!enemy.explode) {
+  if (!enemy.explode) {
     enemy.explode = true;
     enemyCounter--;
     enemiesCounterObject.innerHTML = enemyCounter;
@@ -295,20 +295,20 @@ function enemyExplosion(enemy, collideWithPlanet = false) {
     setTimeout(() => {
       enemy.remove();
     }, 750);
-    
-    if(collideWithPlanet) {
+
+    if (collideWithPlanet) {
       enemy.explode = true;
       planetHealth -= 12;
       planetHealthBarObject.style.width = `${planetHealth}px`;
     }
-  }  
-  
+  }
+
   playEnemyExplosionSound();
-  if(planetHealth <= 0) {
+  if (planetHealth <= 0) {
     gameStop();
   }
 
-  if(enemyCounter === 0) {
+  if (enemyCounter === 0) {
     gameStop(true);
   }
 }
@@ -342,7 +342,7 @@ function enemiesController() {
 
   for (let i = 0; i < enemies.length; i++) {
     const enemy = enemies[i];
-    
+
     checkPlayerEnemyCollide();
 
     if (enemy) {
@@ -356,7 +356,7 @@ function enemiesController() {
 }
 
 function shoot() {
-  if(isGameRunning) {
+  if (isGameRunning) {
     let shootObject = document.createElement('div');
     shootObject.className = 'player-shoot';
     shootObject.style = `top: ${player.yPosition}px; left: ${player.xPosition + (player.object.offsetWidth / 2)}px;`;
@@ -368,15 +368,15 @@ function shoot() {
 
 function shootsController() {
   shoots = document.querySelectorAll('.player-shoot');
-  
+
   for (let i = 0; i < shoots.length; i++) {
     const shoot = shoots[i];
-    
-    if(shoot) {
+
+    if (shoot) {
       shoot.style.top = `${shoot.offsetTop - shootSpeed}px`;
 
       checkShootEnemyCollide(shoot);
-      if(shoot.offsetTop < 0) {
+      if (shoot.offsetTop < 0) {
         shoot.remove();
       }
     }
@@ -387,7 +387,7 @@ function checkShootEnemyCollide(shoot) {
   for (let i = 0; i < enemies.length; i++) {
     const enemy = enemies[i];
 
-    if(
+    if (
       (
         (shoot.offsetTop <= (enemy.offsetTop + enemy.offsetHeight))
         &&
@@ -399,21 +399,21 @@ function checkShootEnemyCollide(shoot) {
         &&
         ((shoot.offsetLeft + shoot.offsetWidth) >= enemy.offsetLeft)
       )
-      && 
+      &&
       !enemy.explode
     ) {
       enemy.takenShoots++;
 
-      if(enemy.classList.contains('little-enemy')) {
-        if(enemy.takenShoots >= 2) {
+      if (enemy.classList.contains('little-enemy')) {
+        if (enemy.takenShoots >= 2) {
           enemyExplosion(enemy);
         }
-      } else if(enemy.classList.contains('medium-enemy')) {
-        if(enemy.takenShoots >= 4) {
+      } else if (enemy.classList.contains('medium-enemy')) {
+        if (enemy.takenShoots >= 4) {
           enemyExplosion(enemy);
         }
-      } else if(enemy.classList.contains('big-enemy')) {
-        if(enemy.takenShoots >= 6) {
+      } else if (enemy.classList.contains('big-enemy')) {
+        if (enemy.takenShoots >= 6) {
           enemyExplosion(enemy);
         }
       }
@@ -427,7 +427,7 @@ function checkPlayerEnemyCollide() {
   for (let i = 0; i < enemies.length; i++) {
     const enemy = enemies[i];
 
-    if(
+    if (
       (
         (player.object.offsetTop <= (enemy.offsetTop + enemy.offsetHeight))
         &&
@@ -439,14 +439,14 @@ function checkPlayerEnemyCollide() {
         &&
         ((player.object.offsetLeft + player.object.offsetWidth) >= enemy.offsetLeft)
       )
-      && 
+      &&
       !enemy.explode
-    ) {     
+    ) {
       player.object.style.backgroundImage = 'url(images/explosion.gif)';
       player.object.style.width = '16px';
       player.object.style.height = '16px';
       player.object.explode = true;
-  
+
       setTimeout(() => {
         player.object.style.display = 'none';
       }, 750);
@@ -475,7 +475,7 @@ function playerController() {
 }
 
 function gameLoop() {
-  if(isGameRunning) {
+  if (isGameRunning) {
     playerController();
     shootsController();
     enemiesController();
@@ -489,8 +489,8 @@ window.addEventListener('selectstart', event => event.preventDefault());
 function gameStop(win = false) {
   isGameRunning = false;
   document.getElementById('message').style.display = 'flex';
-  
-  if(win) {
+
+  if (win) {
     winMessage.style.display = 'flex';
     defeatMessage.style.display = 'none';
   } else {
@@ -503,13 +503,13 @@ function gameStop(win = false) {
 
   for (let i = 0; i < enemies.length; i++) {
     const enemy = enemies[i];
-    
+
     enemy.remove();
   }
 
   for (let i = 0; i < shoots.length; i++) {
     const shoot = shoots[i];
-    
+
     shoot.remove();
   }
 
@@ -517,6 +517,17 @@ function gameStop(win = false) {
 }
 
 function start() {
+  if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    isMobile = true;
+  }
+
+  if (isMobile) {
+    document.getElementById('gameScreen').style.width = `${window.screen.width}px`;
+    document.getElementById('message').style.width = `${window.screen.width}px`;
+    document.getElementById('gui').style.width = `${window.screen.width}px`;
+    document.getElementById('mobileControllers').style.width = `${window.screen.width}px`;
+  }
+
   screen.object = document.getElementById('gameScreen');
   screen.width = screen.object.offsetWidth;
   screen.height = screen.object.offsetHeight;
