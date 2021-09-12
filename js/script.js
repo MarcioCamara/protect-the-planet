@@ -484,6 +484,8 @@ function gameLoop() {
   frames = requestAnimationFrame(gameLoop);
 }
 
+window.addEventListener('selectstart', event => event.preventDefault());
+
 function gameStop(win = false) {
   isGameRunning = false;
   document.getElementById('message').style.display = 'flex';
