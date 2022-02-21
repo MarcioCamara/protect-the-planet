@@ -58,9 +58,15 @@ class Dialogue {
             document.getElementById('inputContainer').style.display = 'flex';
 
             document.getElementById('confirmInput').addEventListener('click', () => {
+                const inputValue = document.getElementById('input').value;
+
+                if (!inputValue) {
+                    return;
+                }
+
                 document.getElementById('inputContainer').style.display = 'none';
-                Dialogue.interactivityVariables[Dialogue.list[game.currentDialogue].interactivity.variable] = document.getElementById('input').value;
-                Dialogue.list[game.currentDialogue + 1].sentence = `Certo, <strong>${Dialogue.interactivityVariables.playerName}</strong>. O planeta está sendo atacado por uma tropa alienigena!`;
+                Dialogue.interactivityVariables[Dialogue.list[game.currentDialogue].interactivity.variable] = inputValue;
+                Dialogue.list[game.currentDialogue + 1].sentence = `Certo, <strong>${Dialogue.interactivityVariables.playerName}</strong>. O planeta está sendo atacado por uma tropa alienígena!`;
                 this.isNextInput = false;
                 Dialogue.changeDialogue();
             });

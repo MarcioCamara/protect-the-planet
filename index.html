@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Protect the Planet</title>
+    <title>Protect the Planet!</title>
+    <!-- <link rel="icon" type="image/gif" href="images/player.gif"> -->
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="css/styles.css">
@@ -30,6 +31,14 @@
 
         <div class="player" id="player"></div>
 
+        <div id="logoContainer" class="logo-container">
+            <div id="logo">
+                PROTECT
+                <br />
+                THE PLANET!
+            </div>
+        </div>
+
         <div class="message" id="message">
             <span id="planetDestroyed" class="planet-destroyed">You lose! The planet was destroyed!</span>
             <span id="playerDestroyed" class="player-destroyed">You lose! Your ship was destroyed!</span>
@@ -51,11 +60,13 @@
         </div>
 
         <div class="input-container" id="inputContainer">
-            <label id="inputLabel" class="input-label"></label>
+            <div class="input">
+                <label id="inputLabel" class="input-label"></label>
 
-            <input type="text" id="input" />
+                <input type="text" id="input" />
 
-            <span id="confirmInput" class="confirm-input">Confirmar</span>
+                <span id="confirmInput" class="confirm-input">Confirmar</span>
+            </div>
         </div>
 
         <div class="mobile-controllers" id="mobileControllers">
@@ -89,7 +100,7 @@
         </div>
 
         <div class="version-container">
-            v1.1.1
+            v1.2.0
         </div>
     </div>
 

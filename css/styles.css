@@ -14,6 +14,21 @@
     url("../fonts/NicoPups-Regular.svg#filename") format("svg");
 }
 
+@font-face {
+  font-family: "Platinum Sign";
+  src: url("../fonts/Platinum\ Sign.ttf");
+}
+
+@font-face {
+  font-family: "Platinum Sign Under";
+  src: url("../fonts/Platinum\ Sign\ Under.ttf");
+}
+
+@font-face {
+  font-family: "Platinum Sign Over";
+  src: url("../fonts/Platinum\ Sign\ Over.ttf");
+}
+
 body {
   margin: 0;
   font-family: "NicoPups Monospaced";
@@ -51,7 +66,7 @@ body {
 .message {
   height: 103px;
   display: flex;
-  margin-top: calc(50vh - 169px);
+  margin-top: calc(50vh - 120px);
   justify-content: center;
   position: absolute;
   align-items: center;
@@ -154,6 +169,7 @@ body {
   font-weight: bolder;
   font-size: 1.5rem;
   cursor: pointer;
+  margin-right: 4px;
 }
 
 .dialogue-message {
@@ -188,16 +204,23 @@ body {
 }
 
 .input-container {
-  width: 84vw;
+  width: 512px;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: none;
+  height: 100vh;
+}
+
+.input {
+  width: 75%;
   height: 64px;
   background-color: #edeef2;
-  display: none;
   flex-direction: column;
   padding: 16px;
-  position: absolute;
-  margin: auto;
-  margin-top: calc(50vh - 64px);
-  margin-left: calc((50vw - 84vw / 2) / 2);
+  display: flex;
+  border-radius: 4px;
 }
 
 .mobile-controllers {
@@ -261,4 +284,36 @@ body {
   position: absolute;
   margin-left: 8px;
   bottom: 8px;
+}
+
+#logo {
+  font-family: "Platinum Sign Over";
+  position: relative;
+  z-index: 3;
+  color: #FFD100;
+  font-size: 2rem;
+  text-shadow: 5px 5px 2px #000000;
+}
+
+.logo-container {
+  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2.5rem;
+  width: 100%;
+  margin-top: calc(50vh - 175px);
+}
+
+path {
+  fill: transparent;
+}
+
+text {
+  font-family: "Platinum Sign Over";
+  position: relative;
+  z-index: 3;
+  fill: #FFD100;
+  font-size: 3rem;
+  text-shadow: 5px 5px 2px #000000;
 }

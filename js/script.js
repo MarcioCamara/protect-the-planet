@@ -21,6 +21,7 @@ document.getElementById('playButton').addEventListener('click', () => {
   game.attempt++;
 
   document.getElementById('message').style.display = 'none';
+  document.getElementById('logoContainer').style.display = 'none';
 
   if (game.attempt <= 1) {
     Dialogue.initialize();
@@ -120,6 +121,7 @@ function start() {
     document.getElementById('message').style.width = `${window.screen.width}px`;
     document.getElementById('gui').style.width = `${window.screen.width}px`;
     document.getElementById('mobileControllers').style.width = `${window.screen.width}px`;
+    document.getElementById('inputContainer').style.width = `${window.screen.width}px`;
   }
 
   clearInterval(enemyCreationInterval);
