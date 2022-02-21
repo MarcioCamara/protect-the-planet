@@ -31,8 +31,11 @@
         <div class="player" id="player"></div>
 
         <div class="message" id="message">
-            <span id="defeatMessage" class="defeat-message">You lose! The planet was destroyed!</span>
-            <span id="winMessage" class="win-message">You win! Congratulations!</span>
+            <span id="planetDestroyed" class="planet-destroyed">You lose! The planet was destroyed!</span>
+            <span id="playerDestroyed" class="player-destroyed">You lose! Your ship was destroyed!</span>
+            <span id="winMessage" class="win-message">You win! The Earth was saved!</span>
+            <span id="perfectWinMessage" class="perfect-win-message">PERFECT! YOU DESERVE A MEDAL!</span>
+
             <span id="playButton"></button>Play</span>
         </div>
 
@@ -42,8 +45,9 @@
             <div class="dialogue-message">
                 <label id="dialogueLabel" class="dialogue-label"></label>
 
-                <span id="nextDialogue" class="next-dialogue animate__animated animate__infinite animate__heartBeat">></span>
-            </div>            
+                <span id="nextDialogue"
+                    class="next-dialogue animate__animated animate__infinite animate__heartBeat">></span>
+            </div>
         </div>
 
         <div class="input-container" id="inputContainer">
@@ -66,12 +70,12 @@
                     <span class="left-button" id="leftButton">
                         >
                     </span>
-                    
+
                     <span class="right-button" id="rightButton">
                         >
                     </span>
                 </div>
-                
+
                 <div style="display: flex; align-items: center; width: 100%; justify-content: center;">
                     <span class="bottom-button" id="bottomButton">
                         >
@@ -88,6 +92,14 @@
             v1.1.1
         </div>
     </div>
+
+    <script src="js/classes/Game.js"></script>
+    <script src="js/classes/Screen.js"></script>
+    <script src="js/classes/Planet.js"></script>
+    <script src="js/classes/Player.js"></script>
+    <script src="js/classes/Enemy.js"></script>
+    <script src="js/classes/Shoot.js"></script>
+    <script src="js/classes/Dialogue.js"></script>
 
     <script src="js/script.js"></script>
 </body>

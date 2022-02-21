@@ -59,8 +59,10 @@ body {
   flex-direction: column;
 }
 
-.defeat-message,
-.win-message {
+.planet-destroyed,
+.player-destroyed,
+.win-message,
+.perfect-win-message {
   margin-bottom: 2rem;
   display: none;
 }
