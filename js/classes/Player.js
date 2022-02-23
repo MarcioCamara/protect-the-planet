@@ -12,18 +12,24 @@ class Player {
         this.shootCooldown = 150;
         this.preventShoot = false;
         this.destroyedMessage = document.getElementById('playerDestroyed');
+        this.name = 'HANS';
+        this.city = undefined;
+        this.country = undefined;
+        this.continent = undefined;
+        this.score = 0;
     }
 
     reset() {
-        this.object.style.display = 'block';
         this.object.style.backgroundImage = 'url(images/player.gif)';
         this.object.style.width = '16px';
         this.object.style.height = '24px';
-        this.xPosition = (screen.width / 2 - (this.object.offsetWidth / 2)) + screen.xStart;
-        this.yPosition = (screen.height * .85 - (this.object.offsetHeight / 2)) + screen.yStart;
+        this.xPosition = (screen.object.offsetWidth / 2 - (this.object.offsetWidth / 2)) + screen.object.offsetLeft;
+        this.yPosition = (screen.object.offsetHeight * .85 - (this.object.offsetHeight / 2)) + screen.object.offsetTop;
         this.shootCooldown = 150;
         this.preventShoot = false;
         this.destroyedMessage = document.getElementById('playerDestroyed');
+        this.score = 0;
+        document.getElementById('score').innerHTML = player.score;
     }
 
     playExplosionSound() {
@@ -64,14 +70,18 @@ class Player {
     }
 
     controller() {
-        if (this.xPosition <= screen.xStart) {
-            this.xPosition = screen.xStart;
-        } else if (this.xPosition > screen.xEnd - this.object.offsetWidth) {
-            this.xPosition = screen.xEnd - this.object.offsetWidth;
+        if (this.xPosition <= screen.object.offsetLeft) {
+            this.xPosition = screen.object.offsetLeft + 3;
+            return;
+        } else if (this.xPosition > (screen.object.offsetLeft + screen.object.offsetWidth) - this.object.offsetWidth) {
+            this.xPosition = (screen.object.offsetLeft + screen.object.offsetWidth) - this.object.offsetWidth - 3;
+            return;
         } else if (this.yPosition <= screen.yStart) {
-            this.yPosition = screen.yStart;
+            this.yPosition = screen.yStart + 3;
+            return;
         } else if (this.yPosition > screen.yEnd - this.object.offsetHeight) {
-            this.yPosition = screen.yEnd - this.object.offsetHeight;
+            this.yPosition = screen.yEnd - this.object.offsetHeight - 3;
+            return;
         }
 
         this.yPosition += this.yDirection * this.speed;

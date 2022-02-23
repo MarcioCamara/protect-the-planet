@@ -58,9 +58,11 @@ class Enemy {
     }
 
     static draw() {
+        const biggestEnemyWidth = 32;
+
         if (game.isRunning && game.generatedEnemies > 0) {
             let position = {
-                x: getRandomValue(screen.xStart + player.object.offsetWidth, screen.xEnd - player.object.offsetWidth),
+                x: getRandomValue(screen.object.offsetLeft + biggestEnemyWidth, (screen.object.offsetLeft + screen.object.offsetWidth) - biggestEnemyWidth),
                 y: 0,
             }
 
@@ -103,6 +105,9 @@ class Enemy {
                 enemy.explode = true;
                 Planet.health -= 12;
                 Planet.healthBarObject.style.width = `${Planet.health}px`;
+
+                player.score = player.score - 200 < 0 ? 0 : player.score - 200;
+                document.getElementById('score').innerHTML = player.score;
             }
         }
 

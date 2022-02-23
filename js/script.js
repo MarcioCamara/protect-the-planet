@@ -5,7 +5,8 @@ let planet = new Planet();
 let screen = new Screen();
 let player = new Player();
 
-let movementKeys = [37, 65, 39, 68, 38, 87, 40, 83];
+const movementKeys = [37, 65, 39, 68, 38, 87, 40, 83];
+const pauseKey = 80;
 
 let enemyCreationInterval = undefined;
 
@@ -25,6 +26,7 @@ document.getElementById('playButton').addEventListener('click', () => {
 
   if (game.attempt <= 1) {
     Dialogue.initialize();
+    player.reset();
   } else {
     game.start();
   }
@@ -36,17 +38,6 @@ let gui = document.getElementById('gui');
 let winMessage = document.getElementById('winMessage');
 let perfectWinMessage = document.getElementById('perfectWinMessage');
 let mobileControllers = document.getElementById('mobileControllers');
-
-let prev = 0;
-function keyDown(event) {
-  let key = event.keyCode;
-
-  if (movementKeys.includes(key)) {
-    player.move(key);
-  } else {
-    player.shoot();
-  }
-}
 
 const topButton = document.getElementById('topButton');
 const leftButton = document.getElementById('leftButton');
@@ -97,6 +88,24 @@ function windowClick() {
   player.shoot();
 }
 
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState !== 'visible') {
+    game.pause();
+  }
+});
+
+function keyDown(event) {
+  let key = event.keyCode;
+
+  if (movementKeys.includes(key)) {
+    player.move(key);
+  } else if (key === pauseKey) {
+    game.togglePause();
+  } else {
+    player.shoot();
+  }
+}
+
 function keyUp(event) {
   let key = event.keyCode;
 
@@ -112,6 +121,19 @@ function getRandomValue(max, min) {
 }
 
 function start() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition((position) => {
+      fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${position.coords.latitude}&longitude=${position.coords.longitude}&localityLanguage=en`)
+        .then(response => response.json())
+        .then((result) => {
+          player.city = result.city;
+          player.country = result.countryName;
+          player.continent = result.continent;
+        });
+
+    });
+  }
+
   if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
     isMobile = true;
   }
@@ -122,6 +144,7 @@ function start() {
     document.getElementById('gui').style.width = `${window.screen.width}px`;
     document.getElementById('mobileControllers').style.width = `${window.screen.width}px`;
     document.getElementById('inputContainer').style.width = `${window.screen.width}px`;
+    document.getElementById('rankingContainer').style.width = `${window.screen.width}px`;
   }
 
   clearInterval(enemyCreationInterval);

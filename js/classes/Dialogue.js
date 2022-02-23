@@ -18,26 +18,31 @@ class Dialogue {
         this.list = [
             {
                 id: 0,
-                sentence: 'Hey, viajante! Graças a Glork, você acordou!',
+                sentence: 'Hey, traveler! Thanks to Glork, you woke up!',
                 picture: 'images/happy-wolf.png',
             },
             {
                 id: 1,
-                sentence: 'Meu nome é <strong>Kieko</strong>. Qual é o seu nome?',
+                sentence: 'I\'m <strong>KIEKO</strong>. What is your name?',
                 picture: 'images/default-wolf.png',
                 interactivity: {
-                    text: 'Qual é o seu nome?',
+                    text: 'What\'s your name?',
                     variable: 'playerName',
                 },
             },
             {
                 id: 2,
-                sentence: `Certo, <strong>${this.interactivityVariables.playerName}</strong>. O planeta está sendo atacado por uma tropa alienigena!`,
+                sentence: '',
                 picture: 'images/annoyed-wolf.png',
             },
             {
                 id: 3,
-                sentence: 'Precisamos fazer algo sobre isso. Entre na sua nave e vamos acabar com eles!',
+                sentence: `But we talk more later. Our planet is being attacked by an alien troop!`,
+                picture: 'images/annoyed-wolf.png',
+            },
+            {
+                id: 4,
+                sentence: 'We need to do something about it. Get in your ship and let\'s finish them off!',
                 picture: 'images/angry-wolf.png',
             },
         ];
@@ -65,8 +70,14 @@ class Dialogue {
                 }
 
                 document.getElementById('inputContainer').style.display = 'none';
-                Dialogue.interactivityVariables[Dialogue.list[game.currentDialogue].interactivity.variable] = inputValue;
-                Dialogue.list[game.currentDialogue + 1].sentence = `Certo, <strong>${Dialogue.interactivityVariables.playerName}</strong>. O planeta está sendo atacado por uma tropa alienígena!`;
+                Dialogue.interactivityVariables[Dialogue.list[game.currentDialogue].interactivity.variable] = inputValue.toUpperCase();
+                player.name = inputValue.toUpperCase();
+
+                if (player.city && player.continent) {
+                    Dialogue.list[game.currentDialogue + 1].sentence = `Okay, <strong>${Dialogue.interactivityVariables.playerName}</strong>. From the data on your ship, I see that you're from <strong>${player.country}</strong>, <strong>${player.city}</strong>!`;
+                } else {
+                    Dialogue.list[game.currentDialogue + 1].sentence = `Okay, <strong>${Dialogue.interactivityVariables.playerName}</strong>. I can't read the data on your ship to know where are you from...`;
+                }
                 this.isNextInput = false;
                 Dialogue.changeDialogue();
             });

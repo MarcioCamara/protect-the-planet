@@ -46,13 +46,77 @@ class Game {
         Planet.healthBarObject.style.width = `${Planet.health}px`;
 
         gui.style.display = 'flex';
+        //exibir a nave
+        player.object.style.display = 'block';
         Dialogue.dialogueElement.style.display = 'none';
         mobileControllers.style.display = isMobile ? 'flex' : 'none';
     }
 
+    mountRanking = () => {
+        const ranking = [
+            {
+                name: 'ROBSON',
+                score: 2500,
+            },
+            {
+                name: player.name,
+                score: player.score,
+            },
+            {
+                name: 'SOPHIE',
+                score: 1000,
+            },
+            {
+                name: 'FERNANDA',
+                score: 1500,
+            },
+            {
+                name: 'FELIPE',
+                score: 1000,
+            },
+        ];
+
+        ranking.sort((a, b) => (a.score < b.score) ? 1 : -1);
+
+        let rankingBody = '';
+        for (let i = 0; i < ranking.length; i++) {
+            rankingBody += `
+                <tr>
+                    <td class="text-left">${ranking[i].name}</td>
+                    <td class="text-center">${ranking[i].score}</td>
+                </tr>`;
+        }
+
+        document.getElementById('rankingBody').innerHTML = rankingBody;
+    }
+
+    togglePause() {
+        if (this.isRunning) {
+            this.isRunning = false;
+            document.getElementById('paused').style.display = 'flex';
+        } else {
+            this.isRunning = true;
+            document.getElementById('paused').style.display = 'none';
+        }
+    }
+
+    pause() {
+        this.isRunning = false;
+        document.getElementById('paused').style.display = 'flex';
+    }
+
     stop = (win = false) => {
         this.isRunning = false;
+
+        gui.style.display = 'none';
+        player.object.style.display = 'none';
+
+        this.mountRanking();
+
         document.getElementById('message').style.display = 'flex';
+        document.getElementById('rankingContainer').style.display = 'flex';
+        document.getElementById('hr').style.display = 'flex';
+        document.getElementById('playButton').innerHTML = 'Play Again';
 
         if (win && Planet.health === 120) {
             perfectWinMessage.style.display = 'flex';

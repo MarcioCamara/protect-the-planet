@@ -61,14 +61,23 @@ class Shoot {
 
                 if (enemy.classList.contains('little-enemy')) {
                     if (enemy.takenShoots >= 2) {
+                        player.score += 100;
+                        document.getElementById('score').innerHTML = player.score;
+
                         Enemy.explosion(enemy);
                     }
                 } else if (enemy.classList.contains('medium-enemy')) {
                     if (enemy.takenShoots >= 4) {
+                        player.score += 100;
+                        document.getElementById('score').innerHTML = player.score;
+
                         Enemy.explosion(enemy);
                     }
                 } else if (enemy.classList.contains('big-enemy')) {
                     if (enemy.takenShoots >= 6) {
+                        player.score += 100;
+                        document.getElementById('score').innerHTML = player.score;
+
                         Enemy.explosion(enemy);
                     }
                 }
