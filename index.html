@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Protect the Planet!</title>
-    <!-- <link rel="icon" type="image/gif" href="images/player.gif"> -->
+    <link rel="icon" type="image/gif" href="images/player.gif">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="css/styles.css">
@@ -20,8 +20,12 @@
 
     <div class="game-screen" id="gameScreen">
         <div id="gui">
+
             <div class="left-gui">
-                Score:
+                <div class="pause-button" id="pauseButton"> = </div>
+                <div class="resume-button" id="resumeButton"> &#8227; </div>
+
+                <span>Score:</span>
                 <span id="score">0</span>
             </div>
 
@@ -78,22 +82,23 @@
             <hr id="hr" />
 
             <div class="ranking-container" id="rankingContainer">
-                <div class="ranking-radio-container">
+                <div class="ranking-radio-container" id="rankingRadioContainer">
                     <label class="radio-container">
-                        City
-                        <input type="radio" checked="checked" name="rankingRadio">
+                        World
+                        <input type="radio" checked="checked" name="rankingRadio" id="rankingWorld">
                         <span class="checkmark"></span>
                     </label>
+
 
                     <label class="radio-container">
                         Country
-                        <input type="radio" name="rankingRadio">
+                        <input type="radio" name="rankingRadio" id="rankingCountry">
                         <span class="checkmark"></span>
                     </label>
 
                     <label class="radio-container">
-                        World
-                        <input type="radio" name="rankingRadio">
+                        City
+                        <input type="radio" name="rankingRadio" id="rankingCity">
                         <span class="checkmark"></span>
                     </label>
                 </div>
@@ -138,8 +143,6 @@
             </div>
         </div>
 
-
-
         <div class="mobile-controllers" id="mobileControllers">
             <div class="mobile-directional" id="mobileDirectional">
                 <div style="display: flex; align-items: center; width: 100%; justify-content: center;">
@@ -182,6 +185,10 @@
     <script src="js/classes/Enemy.js"></script>
     <script src="js/classes/Shoot.js"></script>
     <script src="js/classes/Dialogue.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 
     <script src="js/script.js"></script>
 </body>

@@ -1,5 +1,19 @@
-// reorganizar pra que o controle de quantos tiros é preciso para matar uma nave, fique no objeto da nave e não na funcão
+const firebaseConfig = {
+  apiKey: "AIzaSyCNCRiPfgg8mgcZw_HA9MjJyzASw41BEWU",
+  authDomain: "protect-the-planet-8911f.firebaseapp.com",
+  projectId: "protect-the-planet-8911f",
+  storageBucket: "protect-the-planet-8911f.appspot.com",
+  messagingSenderId: "159933189608",
+  appId: "1:159933189608:web:0651f8c2927c710c61685d",
+  measurementId: "G-WCL0D4TBBB"
+};
 
+// Initialize Firebase
+const app = firebase.initializeApp(firebaseConfig);
+var db = firebase.firestore();
+
+
+// reorganizar pra que o controle de quantos tiros é preciso para matar uma nave, fique no objeto da nave e não na funcão
 let game = new Game();
 let planet = new Planet();
 let screen = new Screen();
@@ -94,6 +108,12 @@ document.addEventListener('visibilitychange', () => {
   }
 });
 
+const pauseButton = document.getElementById('pauseButton');
+const resumeButton = document.getElementById('resumeButton');
+
+resumeButton.addEventListener('click', () => game.togglePause());
+pauseButton.addEventListener('click', () => game.togglePause());
+
 function keyDown(event) {
   let key = event.keyCode;
 
@@ -118,6 +138,32 @@ function keyUp(event) {
 
 function getRandomValue(max, min) {
   return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+document.getElementById('rankingWorld').addEventListener('click', () => this.renderRanking(game.ranking));
+document.getElementById('rankingCountry').addEventListener('click', () => this.renderRanking(game.ranking.filter(rankingItem => rankingItem.country === player.country)));
+document.getElementById('rankingCity').addEventListener('click', () => this.renderRanking(game.ranking.filter(rankingItem => rankingItem.city === player.city)));
+
+function renderRanking(filteredRanking) {
+  let rankingBody = '';
+  const currentPlayer = {
+    name: player.name,
+    score: player.score,
+    status: player.status,
+    city: player.city,
+    country: player.country,
+    continent: player.continent,
+  };
+
+  for (let i = 0; i < filteredRanking.length; i++) {
+    rankingBody += `
+        <tr>
+            <td class="text-left">${filteredRanking[i].name}</td>
+            <td class="text-center">${filteredRanking[i].score}</td>
+        </tr>`;
+  }
+
+  document.getElementById('rankingBody').innerHTML = rankingBody;
 }
 
 function start() {

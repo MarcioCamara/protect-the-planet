@@ -52,7 +52,9 @@ class Enemy {
                 }, 750);
 
                 player.playExplosionSound();
-                game.stop();
+                if (game.isRunning) {
+                    game.stop();
+                }
             }
         }
     }
@@ -113,11 +115,11 @@ class Enemy {
 
         Enemy.playExplosionSound();
 
-        if (Planet.health <= 0) {
+        if (Planet.health <= 0 && game.isRunning) {
             game.stop();
         }
 
-        if (game.enemiesCounter === 0) {
+        if (game.enemiesCounter === 0 && game.isRunning) {
             game.stop(true);
         }
     }

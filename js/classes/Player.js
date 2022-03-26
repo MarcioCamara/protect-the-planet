@@ -13,10 +13,11 @@ class Player {
         this.preventShoot = false;
         this.destroyedMessage = document.getElementById('playerDestroyed');
         this.name = 'HANS';
-        this.city = undefined;
-        this.country = undefined;
-        this.continent = undefined;
+        this.city = '';
+        this.country = '';
+        this.continent = '';
         this.score = 0;
+        this.status = undefined;
     }
 
     reset() {
@@ -30,6 +31,7 @@ class Player {
         this.destroyedMessage = document.getElementById('playerDestroyed');
         this.score = 0;
         document.getElementById('score').innerHTML = player.score;
+        this.status = undefined;
     }
 
     playExplosionSound() {

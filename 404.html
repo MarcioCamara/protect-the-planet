@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Protect the Planet</title>
+    <title>Protect the Planet!</title>
+    <link rel="icon" type="image/gif" href="images/player.gif">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="css/styles.css">
@@ -19,22 +20,107 @@
 
     <div class="game-screen" id="gameScreen">
         <div id="gui">
-            Planet Health
 
-            <div id="planet-health-container">
-                <div id="planetHealthBar"></div>
+            <div class="left-gui">
+                <div class="pause-button" id="pauseButton"> = </div>
+                <div class="resume-button" id="resumeButton"> &#8227; </div>
+
+                <span>Score:</span>
+                <span id="score">0</span>
             </div>
 
-            <span class="enemies-counter">Remaining Enemies: <span id="enemiesCounter">150</span></span>
+            <div class="right-gui">
+                Planet Health
+
+                <div id="planet-health-container">
+                    <div id="planetHealthBar"></div>
+                </div>
+
+                <span class="enemies-counter">Remaining Enemies: <span id="enemiesCounter">150</span></span>
+            </div>
         </div>
 
         <div class="player" id="player"></div>
 
-        <div class="message" id="message">
-            <span id="defeatMessage" class="defeat-message">You lose! The planet was destroyed!</span>
-            <span id="winMessage" class="win-message">You win! Congratulations!</span>
-            <span id="playButton"></button>Play</span>
+        <div id="logoContainer" class="logo-container">
+            <div id="logo">
+                PROTECT
+                <br />
+                THE PLANET!
+            </div>
         </div>
+
+        <div class="message" id="message">
+            <span id="planetDestroyed" class="planet-destroyed">
+                You lose!
+                <span class="message-detail">
+                    The planet was destroyed!
+                </span>
+            </span>
+
+            <span id="playerDestroyed" class="player-destroyed">
+                You lose!
+                <span class="message-detail">
+                    Your ship was destroyed!
+                </span>
+            </span>
+
+            <span id="winMessage" class="win-message">
+                You win!
+                <span class="message-detail">
+                    The Earth was saved!
+                </span>
+            </span>
+
+            <span id="perfectWinMessage" class="perfect-win-message">
+                PERFECT!
+                <span class="message-detail">
+                    YOU DESERVE A MEDAL!
+                </span>
+            </span>
+
+            <hr id="hr" />
+
+            <div class="ranking-container" id="rankingContainer">
+                <div class="ranking-radio-container" id="rankingRadioContainer">
+                    <label class="radio-container">
+                        World
+                        <input type="radio" checked="checked" name="rankingRadio" id="rankingWorld">
+                        <span class="checkmark"></span>
+                    </label>
+
+
+                    <label class="radio-container">
+                        Country
+                        <input type="radio" name="rankingRadio" id="rankingCountry">
+                        <span class="checkmark"></span>
+                    </label>
+
+                    <label class="radio-container">
+                        City
+                        <input type="radio" name="rankingRadio" id="rankingCity">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="text-left">Name</th>
+                            <th class="text-center">Score</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="rankingBody">
+
+                    </tbody>
+                </table>
+            </div>
+
+            <span id="playButton">Play</span>
+        </div>
+
+        <span id="paused" class="animate__animated animate__flash animate__infinite">Paused</span>
 
         <div class="dialogue" id="dialogue">
             <img id="dialoguePicture" class="dialogue-picture">
@@ -42,18 +128,67 @@
             <div class="dialogue-message">
                 <label id="dialogueLabel" class="dialogue-label"></label>
 
-                <span id="nextDialogue" class="next-dialogue animate__animated animate__infinite animate__heartBeat">></span>
-            </div>            
+                <span id="nextDialogue"
+                    class="next-dialogue animate__animated animate__infinite animate__heartBeat">></span>
+            </div>
         </div>
 
         <div class="input-container" id="inputContainer">
-            <label id="inputLabel" class="input-label"></label>
+            <div class="input">
+                <label id="inputLabel" class="input-label"></label>
 
-            <input type="text" id="input" />
+                <input type="text" id="input" />
 
-            <span id="confirmInput" class="confirm-input">Confirmar</span>
+                <span id="confirmInput" class="confirm-input">Confirmar</span>
+            </div>
+        </div>
+
+        <div class="mobile-controllers" id="mobileControllers">
+            <div class="mobile-directional" id="mobileDirectional">
+                <div style="display: flex; align-items: center; width: 100%; justify-content: center;">
+                    <span class="top-button" id="topButton">
+                        >
+                    </span>
+                </div>
+
+                <div style="display: flex; align-items: center; width: 100%; justify-content: space-between;">
+                    <span class="left-button" id="leftButton">
+                        >
+                    </span>
+
+                    <span class="right-button" id="rightButton">
+                        >
+                    </span>
+                </div>
+
+                <div style="display: flex; align-items: center; width: 100%; justify-content: center;">
+                    <span class="bottom-button" id="bottomButton">
+                        >
+                    </span>
+                </div>
+            </div>
+
+            <div class="mobile-shoot" id="mobileShoot">
+                shoot!
+            </div>
+        </div>
+
+        <div class="version-container">
+            v1.2.0
         </div>
     </div>
+
+    <script src="js/classes/Game.js"></script>
+    <script src="js/classes/Screen.js"></script>
+    <script src="js/classes/Planet.js"></script>
+    <script src="js/classes/Player.js"></script>
+    <script src="js/classes/Enemy.js"></script>
+    <script src="js/classes/Shoot.js"></script>
+    <script src="js/classes/Dialogue.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 
     <script src="js/script.js"></script>
 </body>

@@ -111,12 +111,12 @@ hr {
 #gui {
   display: none;
   position: absolute;
-  flex-direction: column; 
+  flex-direction: column;
   width: 512px;
-  padding-top: 16px;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  z-index: 999;
 }
 
 .right-gui {
@@ -180,11 +180,9 @@ hr {
   width: 120px;
   height: 20px;
   border-radius: 4px;
-  background-image: repeating-linear-gradient(
-    -45deg,
-    #1a0c1a 12px,
-    #f1c40fa1 22px
-  );
+  background-image: repeating-linear-gradient(-45deg,
+      #1a0c1a 12px,
+      #f1c40fa1 22px);
 }
 
 .dialogue {
@@ -195,6 +193,7 @@ hr {
   z-index: 1;
   align-self: flex-end;
   position: relative;
+  width: 100%;
 }
 
 .dialogue-picture {
@@ -369,7 +368,8 @@ text {
   border-collapse: collapse;
 }
 
-.ranking-container td, .ranking-container th {
+.ranking-container td,
+.ranking-container th {
   padding: 8px;
   border: 1px solid #edeef2;
   box-shadow: #1a0c1a 1px 0px 0px, rgb(26 12 26) 0.540302px 0.841471px 0px,
@@ -378,21 +378,20 @@ text {
     rgb(26 12 26) 0.96017px -0.279415px 0px;
 }
 
-.text-left {  
+.text-left {
   text-align: left;
 }
 
-.text-center {  
+.text-center {
   text-align: center;
 }
 
-.ranking-radio-container {
-  display: flex;
-  justify-content: space-between;
+#rankingRadioContainer {
+  display: none;
+  justify-content: space-evenly;
   width: calc(100% - 32px);
   margin: 8px 16px;
 }
-
 
 /* Customize the label (the container) */
 .radio-container {
@@ -429,7 +428,7 @@ text {
 }
 
 /* On mouse-over, add a grey background color */
-.radio-container:hover input ~ .checkmark {
+.radio-container:hover input~.checkmark {
   background-color: #ccc;
   overflow: hidden;
   display: inline-block;
@@ -437,7 +436,7 @@ text {
 }
 
 /* When the radio button is checked, add a blue background */
-.radio-container input:checked ~ .checkmark {
+.radio-container input:checked~.checkmark {
   background-color: #41a1de;
   overflow: hidden;
   display: inline-block;
@@ -453,7 +452,7 @@ text {
 }
 
 /* Show the indicator (dot/circle) when checked */
-.radio-container input:checked ~ .checkmark:after {
+.radio-container input:checked~.checkmark:after {
   display: block;
 }
 
@@ -465,4 +464,25 @@ text {
   height: 10px;
   border-radius: 50%;
   background: #edeef2;
+}
+
+.pause-button {
+  transform: rotate(90deg);
+  display: flex;
+  width: 13px;
+  font-size: 3rem;
+  margin: 0;
+  padding: 0;
+  height: fit-content;
+  cursor: pointer;
+}
+
+.resume-button {
+  display: none;
+  width: fit-content;
+  font-size: 3rem;
+  margin: 0;
+  padding: 0;
+  height: 48px;
+  cursor: pointer;
 }
