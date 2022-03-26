@@ -129,6 +129,8 @@ class Game {
     pause() {
         this.isRunning = false;
         document.getElementById('paused').style.display = 'flex';
+        document.getElementById('resumeButton').style.display = 'flex';
+        document.getElementById('pauseButton').style.display = 'none';
     }
 
     stop = (win = false) => {
