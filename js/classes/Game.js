@@ -19,6 +19,8 @@ class Game {
         this.backgroundMusic = document.getElementById('backgroundMusic');
 
         this.ranking = [];
+
+        this.elapsedTime;
     }
 
     loop = () => {
@@ -51,6 +53,27 @@ class Game {
         player.object.style.display = 'block';
         Dialogue.dialogueElement.style.display = 'none';
         mobileControllers.style.display = isMobile ? 'flex' : 'none';
+
+        this.startElapsedTime();
+    }
+
+    startElapsedTime() {
+        let time = 0, minutes, seconds;
+
+        document.getElementById('elapsedTime').textContent = '00:00';
+
+        this.elapsedTime = setInterval(() => {
+            this.state === 'running' ? (time++) : (time = time);
+
+            minutes = parseInt(time / 60, 10);
+            seconds = parseInt(time % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            document.getElementById('elapsedTime').textContent = minutes + ":" + seconds;
+            console.log(time);
+        }, 1000);
     }
 
     saveScore = (currentPlayer) => {
@@ -114,7 +137,6 @@ class Game {
             });
     }
 
-    // document.getElementById('resumeCounter').textContent = seconds;
     startResumeCounter() {
         document.getElementById('resumeCounter').textContent = '';
 
@@ -161,6 +183,7 @@ class Game {
 
     stop = (win = false) => {
         this.state = 'stopped';
+        clearInterval(this.elapsedTime);
 
         gui.style.display = 'none';
         player.object.style.display = 'none';

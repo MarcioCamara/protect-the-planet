@@ -133,6 +133,8 @@ hr {
 
 .left-gui {
   padding: 8px;
+  display: flex;
+  flex-direction: column;
 }
 
 #planet-health-container {
