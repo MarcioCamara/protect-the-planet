@@ -52,7 +52,7 @@ class Enemy {
                 }, 750);
 
                 player.playExplosionSound();
-                if (game.isRunning) {
+                if (game.state === 'running') {
                     game.stop();
                 }
             }
@@ -62,7 +62,7 @@ class Enemy {
     static draw() {
         const biggestEnemyWidth = 32;
 
-        if (game.isRunning && game.generatedEnemies > 0) {
+        if (game.state === 'running' && game.generatedEnemies > 0) {
             let position = {
                 x: getRandomValue(screen.object.offsetLeft + biggestEnemyWidth, (screen.object.offsetLeft + screen.object.offsetWidth) - biggestEnemyWidth),
                 y: 0,
@@ -115,11 +115,11 @@ class Enemy {
 
         Enemy.playExplosionSound();
 
-        if (Planet.health <= 0 && game.isRunning) {
+        if (Planet.health <= 0 && game.state === 'running') {
             game.stop();
         }
 
-        if (game.enemiesCounter === 0 && game.isRunning) {
+        if (game.enemiesCounter === 0 && game.state === 'running') {
             game.stop(true);
         }
     }

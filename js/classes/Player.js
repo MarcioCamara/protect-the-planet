@@ -60,7 +60,7 @@ class Player {
         if (!this.preventShoot) {
             this.preventShoot = true;
 
-            if (game.isRunning) {
+            if (game.state === 'running') {
                 Shoot.draw();
                 Shoot.playSound();
             }

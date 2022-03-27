@@ -59,13 +59,18 @@ body {
   cursor: pointer;
 }
 
-#paused {
+#paused,
+#resumeCounter {
   display: none;
   height: 100vh;
   width: 100%;
   justify-content: center;
   align-items: center;
   font-size: 1.5rem;
+}
+
+#resumeCounter {
+  font-size: 5rem;
 }
 
 .game-screen {

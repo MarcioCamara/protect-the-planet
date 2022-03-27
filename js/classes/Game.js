@@ -1,6 +1,6 @@
 class Game {
     constructor() {
-        this.isRunning = false;
+        this.state = 'stopped';
         this.attempt = 0;
         this.shootSpeed = 7.5;
 
@@ -22,7 +22,7 @@ class Game {
     }
 
     loop = () => {
-        if (game.isRunning) {
+        if (game.state === 'running') {
             player.controller();
             Shoot.controller();
             Enemy.controller();
@@ -34,7 +34,7 @@ class Game {
     start = () => {
         Planet.initialize();
 
-        this.isRunning = true;
+        this.state = 'running';
 
         this.backgroundMusic.loop = true;
         this.backgroundMusic.play();
@@ -64,6 +64,8 @@ class Game {
     }
 
     mountRanking = () => {
+        this.ranking = [];
+
         db.collection('ranking')
             .orderBy('score', 'desc')
             .limit(4)
@@ -112,14 +114,36 @@ class Game {
             });
     }
 
+    // document.getElementById('resumeCounter').textContent = seconds;
+    startResumeCounter() {
+        document.getElementById('resumeCounter').textContent = '';
+
+        let timeleft = 3;
+        const downloadTimer = setInterval(function () {
+            if (timeleft <= 1) {
+                clearInterval(downloadTimer);
+            }
+
+            document.getElementById('resumeCounter').textContent = timeleft;
+            timeleft -= 1;
+        }, 1000);
+    }
+
     togglePause() {
-        if (this.isRunning) {
-            this.isRunning = false;
+        if (this.state === 'running') {
+            this.state = 'paused';
             document.getElementById('paused').style.display = 'flex';
             document.getElementById('resumeButton').style.display = 'flex';
             document.getElementById('pauseButton').style.display = 'none';
-        } else {
-            this.isRunning = true;
+        } else if (this.state === 'paused') {
+            document.getElementById('resumeCounter').style.display = 'flex';
+            this.startResumeCounter();
+
+            setTimeout(() => {
+                this.state = 'running';
+                document.getElementById('resumeCounter').style.display = 'none';
+            }, 4000);
+
             document.getElementById('paused').style.display = 'none';
             document.getElementById('pauseButton').style.display = 'flex';
             document.getElementById('resumeButton').style.display = 'none';
@@ -127,14 +151,16 @@ class Game {
     }
 
     pause() {
-        this.isRunning = false;
-        document.getElementById('paused').style.display = 'flex';
-        document.getElementById('resumeButton').style.display = 'flex';
-        document.getElementById('pauseButton').style.display = 'none';
+        if (this.state === 'running') {
+            this.state = 'paused';
+            document.getElementById('paused').style.display = 'flex';
+            document.getElementById('resumeButton').style.display = 'flex';
+            document.getElementById('pauseButton').style.display = 'none';
+        }
     }
 
     stop = (win = false) => {
-        this.isRunning = false;
+        this.state = 'stopped';
 
         gui.style.display = 'none';
         player.object.style.display = 'none';
