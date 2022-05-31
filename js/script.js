@@ -95,7 +95,7 @@ bottomButton.addEventListener('touchend', () => {
 });
 
 const shootButton = document.getElementById('mobileShoot');
-const shootMobile = player.shoot.bind(null, player.xPosition, player.yPosition);
+const shootMobile = player.shoot.bind(player, player.xPosition, player.yPosition);
 shootButton.addEventListener('touchstart', shootMobile);
 
 function windowClick() {

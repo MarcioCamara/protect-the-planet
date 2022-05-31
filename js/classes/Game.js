@@ -72,7 +72,6 @@ class Game {
             seconds = seconds < 10 ? "0" + seconds : seconds;
 
             document.getElementById('elapsedTime').textContent = minutes + ":" + seconds;
-            console.log(time);
         }, 1000);
     }
 
