@@ -44,7 +44,6 @@ class Player {
 
     // @todo: ver de ajustar movimentação para que não trave quando trocar de direção
     move(key) {
-        console.log(this);
         if (key === 37 || key === 65) {
             this.xDirection = -1;
         } else if (key === 39 || key === 68) {

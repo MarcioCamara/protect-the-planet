@@ -20,10 +20,22 @@
 
     <div class="game-screen" id="gameScreen">
         <div id="gui">
-
             <div class="left-gui">
-                <div class="pause-button" id="pauseButton"> = </div>
-                <div class="resume-button" id="resumeButton"> &#8227; </div>
+                <div class="settings-container">
+                    <div class="pause-button" id="pauseButton">
+                        <span role="img" aria-label="Pause"> &#x23F8;&#xFE0E; </span>
+                    </div>
+                    <div class="resume-button" id="resumeButton">
+                        <span role="img" aria-label="Resume"> &#x23F5;&#xFE0E; </span>
+                    </div>
+
+                    <div class="mute-button" id="muteButton">
+                        <span role="img" aria-label="Mute">&#x1f507;&#xFE0E;</span>
+                    </div>
+                    <div class="unmute-button" id="unmuteButton">
+                        <span role="img" aria-label="Unmute">&#x1f508;&#xFE0E;</span>
+                    </div>
+                </div>
 
                 <span>Score:</span>
                 <span id="score">0</span>
@@ -143,7 +155,7 @@
 
                 <input type="text" id="input" />
 
-                <span id="confirmInput" class="confirm-input">Confirmar</span>
+                <span id="confirmInput" class="confirm-input">Confirm</span>
             </div>
         </div>
 

@@ -477,23 +477,34 @@ text {
   background: #edeef2;
 }
 
-.pause-button {
-  transform: rotate(90deg);
-  display: flex;
-  width: 13px;
-  font-size: 3rem;
+.pause-button,
+.resume-button,
+.mute-button,
+.unmute-button {
+  display: none;
+  width: fit-content;
+  font-size: 2rem;
   margin: 0;
   padding: 0;
-  height: fit-content;
+  height: auto;
   cursor: pointer;
 }
 
-.resume-button {
-  display: none;
-  width: fit-content;
-  font-size: 3rem;
-  margin: 0;
-  padding: 0;
-  height: 48px;
-  cursor: pointer;
+.mute-button {
+  display: flex;
+}
+
+.pause-button {
+  display: flex;
+}
+
+.mute-button,
+.unmute-button {
+  margin-left: 3px;
+}
+
+.settings-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }

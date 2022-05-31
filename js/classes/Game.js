@@ -242,4 +242,18 @@ class Game {
 
         this.mountRanking();
     }
+
+    mute() {
+        document.getElementById('unmuteButton').style.display = 'flex';
+        document.getElementById('muteButton').style.display = 'none';
+
+        this.backgroundMusic.pause();
+    }
+
+    unmute() {
+        document.getElementById('muteButton').style.display = 'flex';
+        document.getElementById('unmuteButton').style.display = 'none';
+
+        this.backgroundMusic.play();
+    }
 }

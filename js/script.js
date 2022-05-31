@@ -110,9 +110,13 @@ document.addEventListener('visibilitychange', () => {
 
 const pauseButton = document.getElementById('pauseButton');
 const resumeButton = document.getElementById('resumeButton');
-
 resumeButton.addEventListener('click', () => game.togglePause());
 pauseButton.addEventListener('click', () => game.togglePause());
+
+const muteButton = document.getElementById('muteButton');
+const unmuteButton = document.getElementById('unmuteButton');
+muteButton.addEventListener('click', () => game.mute());
+unmuteButton.addEventListener('click', () => game.unmute());
 
 function keyDown(event) {
   let key = event.keyCode;
