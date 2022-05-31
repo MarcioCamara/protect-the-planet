@@ -29,6 +29,10 @@
   src: url("../fonts/Platinum\ Sign\ Over.ttf");
 }
 
+html {
+  user-select: none;
+}
+
 body {
   margin: 0;
   font-family: "NicoPups Monospaced";
