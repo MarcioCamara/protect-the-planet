@@ -43,8 +43,8 @@ class Enemy {
                 !enemy.explode
             ) {
                 player.object.style.backgroundImage = 'url(images/explosion.gif)';
-                player.object.style.width = '16px';
-                player.object.style.height = '16px';
+                player.object.style.width = '24px';
+                player.object.style.height = '24px';
                 player.object.explode = true;
 
                 setTimeout(() => {
@@ -60,7 +60,7 @@ class Enemy {
     }
 
     static draw() {
-        const biggestEnemyWidth = 32;
+        const biggestEnemyWidth = 48;
 
         if (game.state === 'running' && game.generatedEnemies > 0) {
             let position = {
@@ -91,8 +91,8 @@ class Enemy {
 
     static explosion(enemy, collideWithPlanet = false) {
         enemy.style.backgroundImage = 'url(images/explosion.gif)';
-        enemy.style.width = '16px';
-        enemy.style.height = '16px';
+        enemy.style.width = '24px';
+        enemy.style.height = '24px';
 
         if (!enemy.explode) {
             enemy.explode = true;

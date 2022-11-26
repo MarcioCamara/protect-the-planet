@@ -22,8 +22,8 @@ class Player {
 
     reset() {
         this.object.style.backgroundImage = 'url(images/player.gif)';
-        this.object.style.width = '16px';
-        this.object.style.height = '24px';
+        this.object.style.width = '36px';
+        this.object.style.height = '48px';
         this.xPosition = (screen.object.offsetWidth / 2 - (this.object.offsetWidth / 2)) + screen.object.offsetLeft;
         this.yPosition = (screen.object.offsetHeight * .85 - (this.object.offsetHeight / 2)) + screen.object.offsetTop;
         this.shootCooldown = 150;
@@ -46,8 +46,14 @@ class Player {
     move(key) {
         if (key === 37 || key === 65) {
             this.xDirection = -1;
+
+            this.object.style.backgroundImage = 'url(images/player-start-turning-left.gif)';
+            this.object.style.backgroundImage = 'url(images/player-finish-turning-left.gif)';
         } else if (key === 39 || key === 68) {
             this.xDirection = 1;
+
+            this.object.style.backgroundImage = 'url(images/player-start-turning-right.gif)';
+            this.object.style.backgroundImage = 'url(images/player-finish-turning-right.gif)';
         } else if (key === 38 || key === 87) {
             this.yDirection = -1;
         } else if (key === 40 || key === 83) {

@@ -135,6 +135,7 @@ function keyUp(event) {
 
   if ((key === 37 || key === 65) || (key === 39 || key === 68)) {
     player.xDirection = 0;
+    player.object.style.backgroundImage = 'url(images/player.gif)';
   } else if ((key === 38 || key === 87) || (key === 40 || key === 83)) {
     player.yDirection = 0;
   }

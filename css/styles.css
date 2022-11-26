@@ -1,32 +1,32 @@
 @font-face {
   font-family: "NicoPups Monospaced";
-  src: url("../fonts/NicoPups-Monospaced.eot");
-  src: url("../fonts/NicoPups-Monospaced.woff") format("woff"),
-    url("../fonts/NicoPups-Monospaced.otf") format("opentype"),
-    url("../fonts/NicoPups-Monospaced.svg#filename") format("svg");
+  src: url("../fonts/NicoPups/NicoPups-Monospaced.eot");
+  src: url("../fonts/NicoPups/NicoPups-Monospaced.woff") format("woff"),
+    url("../fonts/NicoPups/NicoPups-Monospaced.otf") format("opentype"),
+    url("../fonts/NicoPups/NicoPups-Monospaced.svg#filename") format("svg");
 }
 
 @font-face {
   font-family: "NicoPups Regular";
-  src: url("../fonts/NicoPups-Regular.eot");
-  src: url("../fonts/NicoPups-Regular.woff") format("woff"),
-    url("../fonts/NicoPups-Regular.otf") format("opentype"),
-    url("../fonts/NicoPups-Regular.svg#filename") format("svg");
+  src: url("../fonts/NicoPups/NicoPups-Regular.eot");
+  src: url("../fonts/NicoPups/NicoPups-Regular.woff") format("woff"),
+    url("../fonts/NicoPups/NicoPups-Regular.otf") format("opentype"),
+    url("../fonts/NicoPups/NicoPups-Regular.svg#filename") format("svg");
 }
 
 @font-face {
   font-family: "Platinum Sign";
-  src: url("../fonts/Platinum\ Sign.ttf");
+  src: url("../fonts/Platinum/Platinum\ Sign.ttf");
 }
 
 @font-face {
   font-family: "Platinum Sign Under";
-  src: url("../fonts/Platinum\ Sign\ Under.ttf");
+  src: url("../fonts/Platinum/Platinum\ Sign\ Under.ttf");
 }
 
 @font-face {
   font-family: "Platinum Sign Over";
-  src: url("../fonts/Platinum\ Sign\ Over.ttf");
+  src: url("../fonts/Platinum/Platinum\ Sign\ Over.ttf");
 }
 
 html {
@@ -143,14 +143,16 @@ hr {
 
 #planet-health-container {
   width: 120px;
-  height: 20px;
+  height: 24px;
 }
 
 .player-shoot {
   position: absolute;
   background-image: url("../images/shoot.gif");
-  width: 5px;
-  height: 13px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 12px;
+  height: 24px;
 }
 
 .enemies-counter {
@@ -161,35 +163,43 @@ hr {
   display: none;
   position: absolute;
   background-image: url("../images/player.gif");
-  width: 16px;
-  height: 24px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 36px;
+  height: 48px;
 }
 
 .big-enemy {
   position: absolute;
   background-image: url("../images/big-enemy.gif");
-  width: 32px;
-  height: 32px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 48px;
+  height: 48px;
 }
 
 .medium-enemy {
   position: absolute;
   background-image: url("../images/medium-enemy.gif");
-  width: 32px;
-  height: 16px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 48px;
+  height: 24px;
 }
 
 .little-enemy {
   position: absolute;
   background-image: url("../images/little-enemy.gif");
-  width: 16px;
-  height: 16px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
 }
 
 #planetHealthBar {
   position: absolute;
   width: 120px;
-  height: 20px;
+  height: 16px;
   border-radius: 4px;
   background-image: repeating-linear-gradient(-45deg,
       #1a0c1a 12px,
@@ -500,7 +510,7 @@ text {
 
 .mute-button,
 .unmute-button {
-  margin-left: 3px;
+  margin: 0 0 0 16px;
 }
 
 .settings-container {
